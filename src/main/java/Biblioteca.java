@@ -2,20 +2,18 @@ import java.io.PrintStream;
 import java.util.Collection;
 
 public class Biblioteca {
-    private PrintStream printStream;
 
     //cant instantiate a instance of Collection because its an interface
-    private Collection<String> listOfBooks;
+    private Collection<Book> listOfBooks;
 
-    public Biblioteca(PrintStream printStream, Collection<String> listOfBooks) {
-        this.printStream = printStream;
+    public Biblioteca(Collection<Book> listOfBooks) {
         this.listOfBooks = listOfBooks;
     }
 
 
     public void listBooks() {
-        for(String bookTitle: listOfBooks) {
-            printStream.println(bookTitle);
+        for(Book book: listOfBooks) {
+            book.printBookInformation();
         }
     }
 }

@@ -1,7 +1,6 @@
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -10,35 +9,36 @@ import static org.mockito.Mockito.*;
 public class BibliotecaTest {
 
 
-    private Collection<String> listOfBooks;
-    private PrintStream printStream;
+    private Collection<Book> listOfBooks;
     private Biblioteca biblioteca;
+    private Book book;
 
     @Before
     public void setUp() throws Exception {
         listOfBooks = new ArrayList<>();
-        printStream = mock(PrintStream.class);
-        biblioteca = new Biblioteca(printStream, listOfBooks);
+        book = mock(Book.class);
+        biblioteca = new Biblioteca(listOfBooks);
     }
 
     @Test
     public void shouldPrintNothingWhenThereAreNoBooks() {
         biblioteca.listBooks();
-        verifyZeroInteractions(printStream);
+        verifyZeroInteractions(book);
     }
 
     @Test
     public void shouldPrintOneBookWhenThereIsOneBook() {
-        listOfBooks.add("Book Title");
+        listOfBooks.add(book);
         biblioteca.listBooks();
-        verify(printStream).println("Book Title");
+        verify(book).printBookInformation();
     }
 
     @Test
     public void shouldPrintMultipleBooksWhenThereAreMultipleBooks() {
-        listOfBooks.add("BookTitleOne");
-        listOfBooks.add("BookTitleOne");
+        listOfBooks.add(book);
+        listOfBooks.add(book);
+        listOfBooks.add(book);
         biblioteca.listBooks();
-        verify(printStream, atLeast(2)).println("BookTitleOne");
+        verify(book, times(3)).printBookInformation();
     }
 }

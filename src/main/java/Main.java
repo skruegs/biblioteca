@@ -5,10 +5,12 @@ import java.util.Collection;
 public class Main {
 
     public static void main(String[] args) {
-        Collection<String> listOfBooks = new ArrayList<>();
-        listOfBooks.add("Into The Wild");
         PrintStream printStream = new PrintStream(System.out);
-        Biblioteca biblioteca = new Biblioteca(printStream, listOfBooks);
+        Collection<Book> listOfBooks = new ArrayList<>();
+        listOfBooks.add(new Book("Into the Wild", "John Kraukaer", "1997", printStream));
+        listOfBooks.add(new Book("1984", "George Orwell", "1934", printStream));
+
+        Biblioteca biblioteca = new Biblioteca(listOfBooks);
         WelcomeMessage newMessage = new WelcomeMessage(printStream);
         newMessage.displayWelcomeMessage();
         biblioteca.listBooks();
