@@ -39,9 +39,4 @@ public class MainMenuTest {
         verify(reader).readLine();
     }
 
-//    @Test
-//    public void shouldDisplayListOfBooksWhenUserChooses0() throws Exception {
-//        mainMenu.readUserInput();
-//
-//    }
 }

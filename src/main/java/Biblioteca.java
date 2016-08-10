@@ -11,11 +11,11 @@ public class Biblioteca {
     private WelcomeMessage welcomeMessage;
     private MainMenu mainMenu;
 
-    public Biblioteca(Collection<Book> listOfBooks, PrintStream printStream) {
+    public Biblioteca(Collection<Book> listOfBooks, WelcomeMessage welcomeMessage, MainMenu mainMenu, PrintStream printStream) {
         this.listOfBooks = listOfBooks;
+        this.welcomeMessage = welcomeMessage;
+        this.mainMenu = mainMenu;
         this.printStream = printStream;
-        this.welcomeMessage = new WelcomeMessage(printStream);
-        this.mainMenu = initializeMainMenu(printStream);
     }
 
     public void listBooks() {
@@ -29,9 +29,5 @@ public class Biblioteca {
         mainMenu.displayMenu();
     }
 
-    private static MainMenu initializeMainMenu(PrintStream printStream) {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        return new MainMenu(printStream, reader);
-    }
 
 }

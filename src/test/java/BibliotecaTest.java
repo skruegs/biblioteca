@@ -13,13 +13,17 @@ public class BibliotecaTest {
     private Biblioteca biblioteca;
     private Book book;
     private PrintStream printStream;
+    private WelcomeMessage welcomeMessage;
+    private MainMenu mainMenu;
 
     @Before
     public void setUp() throws Exception {
         listOfBooks = new ArrayList<>();
         book = mock(Book.class);
         printStream = mock(PrintStream.class);
-        biblioteca = new Biblioteca(listOfBooks, printStream);
+        welcomeMessage = mock(WelcomeMessage.class);
+        mainMenu = mock(MainMenu.class);
+        biblioteca = new Biblioteca(listOfBooks,welcomeMessage, mainMenu,printStream);
     }
 
     @Test
@@ -42,5 +46,10 @@ public class BibliotecaTest {
         listOfBooks.add(book);
         biblioteca.listBooks();
         verify(book, times(3)).printBookInformation();
+    }
+
+    @Test
+    public void shouldReturnUserInputToBibliotecaWhenUserChooses() throws Exception {
+
     }
 }
