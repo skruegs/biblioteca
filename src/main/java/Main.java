@@ -6,9 +6,14 @@ import java.util.Collection;
 
 public class Main {
 
-    public static void main(String[] args) {
-        Biblioteca biblioteca = initializeBiblioteca();
-        biblioteca.start();
+    public static void main(String[] args) throws Exception {
+        MainMenu mainMenu = initializeMainMenu();
+        mainMenu.start();
+    }
+
+    private static MainMenu initializeMainMenu() {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        return new MainMenu(System.out, reader, initializeBiblioteca());
     }
 
     private static Biblioteca initializeBiblioteca() {
@@ -17,12 +22,7 @@ public class Main {
         listOfBooks.add(new Book("Into the Wild", "John Kraukaer", "1997", printStream));
         listOfBooks.add(new Book("Animal Farm", "George Orwell", "1934", printStream));
 
-        return new Biblioteca(listOfBooks, initializeWelcomeMessage(printStream), initializeMainMenu(printStream), printStream);
-    }
-
-    private static MainMenu initializeMainMenu(PrintStream printStream) {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        return new MainMenu(printStream, reader);
+        return new Biblioteca(listOfBooks, initializeWelcomeMessage(printStream));
     }
 
     private static WelcomeMessage initializeWelcomeMessage(PrintStream printStream) {

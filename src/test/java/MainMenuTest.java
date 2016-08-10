@@ -7,36 +7,41 @@ import java.io.PrintStream;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class MainMenuTest {
 
     private PrintStream printStream;
     private MainMenu mainMenu;
     private BufferedReader reader;
+    private Biblioteca biblioteca;
 
     @Before
     public void setUp() throws Exception {
         printStream = mock(PrintStream.class);
         reader = mock(BufferedReader.class);
-        mainMenu = new MainMenu(printStream, reader);
+        biblioteca = mock(Biblioteca.class);
+        mainMenu = new MainMenu(printStream, reader, biblioteca);
+        when(reader.readLine()).thenReturn("0");
     }
 
     @Test
-    public void printMenu() {
-        mainMenu.displayMenu();
-        verify(printStream).println("Main Menu:");
+    public void shouldPrintWelcomeWhenMenuStarts() {
+        mainMenu.start();
+        verify(biblioteca).displayWelcomeMessage();
     }
 
     @Test
-    public void shouldPrintMenuOptions() {
-        mainMenu.displayMenu();
-        verify(printStream).println("Enter 0 for a list of books:");
+    public void shouldPrintMenuOptionsWhenMenuStarts() {
+        mainMenu.start();
+        verify(printStream).println("Enter 0 for a list of books");
     }
 
     @Test
-    public void shouldTakeUserInputAfterDisplayingMenu() throws IOException {
-        mainMenu.readUserInput();
-        verify(reader).readLine();
+    public void shouldListBooksWhenChoiceIsZero() {
+        mainMenu.start();
+        verify(biblioteca).listBooks();
+
     }
 
 }

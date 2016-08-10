@@ -18,13 +18,14 @@ public class BibliotecaTest {
 
     @Before
     public void setUp() throws Exception {
-        listOfBooks = new ArrayList<>();
         book = mock(Book.class);
+        listOfBooks = new ArrayList<>();
         printStream = mock(PrintStream.class);
         welcomeMessage = mock(WelcomeMessage.class);
         mainMenu = mock(MainMenu.class);
-        biblioteca = new Biblioteca(listOfBooks,welcomeMessage, mainMenu,printStream);
+        biblioteca = new Biblioteca(listOfBooks,welcomeMessage);
     }
+
 
     @Test
     public void shouldPrintNothingWhenThereAreNoBooks() {
@@ -49,7 +50,9 @@ public class BibliotecaTest {
     }
 
     @Test
-    public void shouldReturnUserInputToBibliotecaWhenUserChooses() throws Exception {
+    public void shouldReturn0ToBibliotecaWhenUserChooses0() throws Exception {
+
+
 
     }
 }

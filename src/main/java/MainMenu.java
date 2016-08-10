@@ -6,27 +6,44 @@ public class MainMenu {
 
     private PrintStream printStream;
     private BufferedReader reader;
+    private Biblioteca biblioteca;
 
-
-    public MainMenu(PrintStream printStream, BufferedReader reader) {
+    public MainMenu(PrintStream printStream, BufferedReader reader, Biblioteca biblioteca) {
         this.printStream = printStream;
         this.reader = reader;
+        this.biblioteca = biblioteca;
     }
 
-    public void displayMenu() {
+    public void start() {
+        biblioteca.displayWelcomeMessage();
+        displayMenu();
+        executeMenuOption();
+    }
+    private void displayMenu() {
         printStream.println("Main Menu:");
         displayMenuOptions();
     }
 
     private void displayMenuOptions() {
-        printStream.println("Enter 0 for a list of books:");
+        printStream.println("Enter 0 for a list of books");
     }
 
-    public void readUserInput() throws IOException {
+    private int readUserInput() {
+        int input = -1;
         try {
-            reader.readLine();
+            input = Integer.parseInt(reader.readLine());
         } catch (IOException e) {
-            e.printStackTrace();
+            printStream.println("I/O Error. Could not read input.");
+        } catch (NumberFormatException n){
+            printStream.println("Invalid input. Please enter a number.");
+        }
+        return input;
+    }
+
+    private void executeMenuOption() {
+        int input = readUserInput();
+        if (input == 0) {
+            biblioteca.listBooks();
         }
     }
 }
