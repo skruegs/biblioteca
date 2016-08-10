@@ -1,6 +1,7 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -8,16 +9,17 @@ import static org.mockito.Mockito.*;
 
 public class BibliotecaTest {
 
-
     private Collection<Book> listOfBooks;
     private Biblioteca biblioteca;
     private Book book;
+    private PrintStream printStream;
 
     @Before
     public void setUp() throws Exception {
         listOfBooks = new ArrayList<>();
         book = mock(Book.class);
-        biblioteca = new Biblioteca(listOfBooks);
+        printStream = mock(PrintStream.class);
+        biblioteca = new Biblioteca(listOfBooks, printStream);
     }
 
     @Test

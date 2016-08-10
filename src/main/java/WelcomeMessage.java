@@ -2,11 +2,9 @@ import java.io.PrintStream;
 
 public class WelcomeMessage {
 
-
     private PrintStream printStream;
 
     public WelcomeMessage(PrintStream printStream) {
-
         this.printStream = printStream;
     }
 

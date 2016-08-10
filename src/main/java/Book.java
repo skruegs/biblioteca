@@ -18,4 +18,5 @@ public class Book {
     public void printBookInformation() {
         printStream.println(title + " | " + author + " | " + year);
     }
+
 }

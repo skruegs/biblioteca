@@ -5,14 +5,17 @@ import java.util.Collection;
 public class Main {
 
     public static void main(String[] args) {
+        Biblioteca biblioteca = initializeBiblioteca();
+        biblioteca.start();
+    }
+
+    private static Biblioteca initializeBiblioteca() {
         PrintStream printStream = new PrintStream(System.out);
         Collection<Book> listOfBooks = new ArrayList<>();
         listOfBooks.add(new Book("Into the Wild", "John Kraukaer", "1997", printStream));
-        listOfBooks.add(new Book("1984", "George Orwell", "1934", printStream));
+        listOfBooks.add(new Book("Animal Farm", "George Orwell", "1934", printStream));
 
-        Biblioteca biblioteca = new Biblioteca(listOfBooks);
-        WelcomeMessage newMessage = new WelcomeMessage(printStream);
-        newMessage.displayWelcomeMessage();
-        biblioteca.listBooks();
+        return new Biblioteca(listOfBooks, printStream);
     }
+
 }
