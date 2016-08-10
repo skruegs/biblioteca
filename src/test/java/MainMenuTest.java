@@ -22,26 +22,33 @@ public class MainMenuTest {
         reader = mock(BufferedReader.class);
         biblioteca = mock(Biblioteca.class);
         mainMenu = new MainMenu(printStream, reader, biblioteca);
-        when(reader.readLine()).thenReturn("0");
     }
 
     @Test
-    public void shouldPrintWelcomeWhenMenuStarts() {
+    public void shouldPrintWelcomeWhenMenuStarts() throws IOException {
+        when(reader.readLine()).thenReturn("0");
         mainMenu.start();
         verify(biblioteca).displayWelcomeMessage();
     }
 
     @Test
-    public void shouldPrintMenuOptionsWhenMenuStarts() {
+    public void shouldPrintMenuOptionsWhenMenuStarts() throws IOException {
+        when(reader.readLine()).thenReturn("0");
         mainMenu.start();
-        verify(printStream).println("Enter 0 for a list of books");
+        verify(printStream).println("0: List Books");
     }
 
     @Test
-    public void shouldListBooksWhenChoiceIsZero() {
+    public void shouldListBooksWhenChoiceIsZero() throws IOException {
+        when(reader.readLine()).thenReturn("0");
         mainMenu.start();
         verify(biblioteca).listBooks();
-
     }
 
+    @Test
+    public void shouldNotifyUserIfInputIsInvalid() throws IOException {
+        when(reader.readLine()).thenReturn("s", "0");
+        mainMenu.start();
+        verify(biblioteca).listBooks();
+    }
 }

@@ -25,26 +25,31 @@ public class MainMenu {
     }
 
     private void displayMenuOptions() {
-        printStream.println("Enter 0 for a list of books");
+        printStream.println("0: List Books");
     }
 
-    private int readUserInput() {
-        int input = -1;
+    private String readLine() {
         try {
-            input = Integer.parseInt(reader.readLine());
+            return reader.readLine();
         } catch (IOException e) {
             printStream.println("I/O Error. Could not read input.");
-        } catch (NumberFormatException n){
-            printStream.println("Invalid input. Please enter a number.");
+        }
+        return null;
+    }
+
+    private String readValidInput() {
+        String input = readLine();
+        while (!input.equals("0")) {
+            printStream.println("Select a valid option!");
+            input = readLine();
         }
         return input;
     }
 
     private void executeMenuOption() {
-        int input = readUserInput();
-        if (input == 0) {
-            biblioteca.listBooks();
-        }
+        readValidInput();
+        biblioteca.listBooks();
+
     }
 }
 
