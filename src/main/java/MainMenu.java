@@ -16,16 +16,16 @@ public class MainMenu {
 
     public void start() {
         biblioteca.displayWelcomeMessage();
-        displayMenu();
-        executeMenuOption();
-    }
-    private void displayMenu() {
-        printStream.println("Main Menu:");
         displayMenuOptions();
+        executeMenuOption();
     }
 
     private void displayMenuOptions() {
-        printStream.println("0: List Books");
+        printStream.println("----------");
+        printStream.println("Main Menu:");
+        printStream.println("----------");
+        printStream.println("0: Quit");
+        printStream.println("1: List Books");
     }
 
     private String readLine() {
@@ -39,7 +39,7 @@ public class MainMenu {
 
     private String readValidInput() {
         String input = readLine();
-        while (!input.equals("0")) {
+        while (!input.equals("0") && !input.equals("1")) {
             printStream.println("Select a valid option!");
             input = readLine();
         }
@@ -47,9 +47,19 @@ public class MainMenu {
     }
 
     private void executeMenuOption() {
-        readValidInput();
-        biblioteca.listBooks();
+        String input = readValidInput();
+        while (!input.equals("0")) {
+            if (input.equals("1")) {
+                biblioteca.listBooks();
+                displayMenuOptions();
+            }
+            input = readValidInput();
+        }
+        quit();
+    }
 
+    public void quit() {
+        printStream.println("¡Hasta La Vista!");
     }
 }
 

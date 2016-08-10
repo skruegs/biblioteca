@@ -5,9 +5,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintStream;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Matchers.contains;
+import static org.mockito.Mockito.*;
 
 public class MainMenuTest {
 
@@ -26,29 +25,36 @@ public class MainMenuTest {
 
     @Test
     public void shouldPrintWelcomeWhenMenuStarts() throws IOException {
-        when(reader.readLine()).thenReturn("0");
+        when(reader.readLine()).thenReturn("1", "0");
         mainMenu.start();
         verify(biblioteca).displayWelcomeMessage();
     }
 
     @Test
     public void shouldPrintMenuOptionsWhenMenuStarts() throws IOException {
-        when(reader.readLine()).thenReturn("0");
+        when(reader.readLine()).thenReturn("1", "0");
         mainMenu.start();
-        verify(printStream).println("0: List Books");
+        verify(printStream, times(4)).println("----------");
     }
 
     @Test
     public void shouldListBooksWhenChoiceIsZero() throws IOException {
-        when(reader.readLine()).thenReturn("0");
+        when(reader.readLine()).thenReturn("1", "0");
         mainMenu.start();
         verify(biblioteca).listBooks();
     }
 
     @Test
     public void shouldNotifyUserIfInputIsInvalid() throws IOException {
-        when(reader.readLine()).thenReturn("s", "0");
+        when(reader.readLine()).thenReturn("s", "1", "0");
         mainMenu.start();
         verify(biblioteca).listBooks();
+    }
+
+    @Test
+    public void shouldRunUntilUserQuits() throws IOException {
+        when(reader.readLine()).thenReturn("s", "1", "0");
+        mainMenu.start();
+        verify(printStream).println("¡Hasta La Vista!");
     }
 }
