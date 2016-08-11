@@ -22,10 +22,7 @@ public class Main {
         listOfBooks.add(new Book("Into the Wild", "John Kraukaer", "1997", printStream));
         listOfBooks.add(new Book("Animal Farm", "George Orwell", "1934", printStream));
 
-        return new Biblioteca(listOfBooks, initializeWelcomeMessage(printStream));
+        return new Biblioteca(listOfBooks);
     }
 
-    private static WelcomeMessage initializeWelcomeMessage(PrintStream printStream) {
-        return new WelcomeMessage(printStream);
-    }
 }

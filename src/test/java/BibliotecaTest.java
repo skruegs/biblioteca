@@ -12,20 +12,13 @@ public class BibliotecaTest {
     private Collection<Book> listOfBooks;
     private Biblioteca biblioteca;
     private Book book;
-    private PrintStream printStream;
-    private WelcomeMessage welcomeMessage;
-    private MainMenu mainMenu;
 
     @Before
     public void setUp() throws Exception {
         book = mock(Book.class);
         listOfBooks = new ArrayList<>();
-        printStream = mock(PrintStream.class);
-        welcomeMessage = mock(WelcomeMessage.class);
-        mainMenu = mock(MainMenu.class);
-        biblioteca = new Biblioteca(listOfBooks,welcomeMessage);
+        biblioteca = new Biblioteca(listOfBooks);
     }
-
 
     @Test
     public void shouldPrintNothingWhenThereAreNoBooks() {
@@ -47,12 +40,5 @@ public class BibliotecaTest {
         listOfBooks.add(book);
         biblioteca.listBooks();
         verify(book, times(3)).printBookInformation();
-    }
-
-    @Test
-    public void shouldReturn0ToBibliotecaWhenUserChooses0() throws Exception {
-
-
-
     }
 }
