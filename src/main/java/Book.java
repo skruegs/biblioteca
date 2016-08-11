@@ -19,4 +19,7 @@ public class Book {
         printStream.println(title + " | " + author + " | " + year);
     }
 
+    public boolean isThisYourTitle(String bookTitle) {
+        return (bookTitle).equals(title);
+    }
 }

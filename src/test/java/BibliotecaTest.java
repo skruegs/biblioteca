@@ -1,23 +1,26 @@
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import static org.junit.Assert.assertFalse;
 import static org.mockito.Mockito.*;
 
 public class BibliotecaTest {
 
-    private Collection<Book> listOfBooks;
+    private Collection<Book> checkedInBooks;
+    private Collection<Book> checkedOutBooks;
     private Biblioteca biblioteca;
     private Book book;
 
     @Before
     public void setUp() throws Exception {
         book = mock(Book.class);
-        listOfBooks = new ArrayList<>();
-        biblioteca = new Biblioteca(listOfBooks);
+        checkedInBooks = new ArrayList<>();
+        checkedOutBooks = new ArrayList<>();
+
+        biblioteca = new Biblioteca(checkedInBooks, checkedOutBooks);
     }
 
     @Test
@@ -28,17 +31,31 @@ public class BibliotecaTest {
 
     @Test
     public void shouldPrintOneBookWhenThereIsOneBook() {
-        listOfBooks.add(book);
+        checkedInBooks.add(book);
+
         biblioteca.listBooks();
         verify(book).printBookInformation();
     }
 
     @Test
     public void shouldPrintMultipleBooksWhenThereAreMultipleBooks() {
-        listOfBooks.add(book);
-        listOfBooks.add(book);
-        listOfBooks.add(book);
+        checkedInBooks.add(book);
+        checkedInBooks.add(book);
+        checkedInBooks.add(book);
+
         biblioteca.listBooks();
         verify(book, times(3)).printBookInformation();
     }
+
+    @Test
+    public void shouldRemoveBookFromCheckedInListWhenCheckOutCalled() throws Exception {
+        checkedInBooks.add(book);
+
+        when(book.isThisYourTitle("")).thenReturn(true);
+        biblioteca.checkOut("");
+
+        assertFalse(checkedInBooks.contains(book));
+    }
+
+
 }

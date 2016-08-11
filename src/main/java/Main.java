@@ -18,11 +18,12 @@ public class Main {
 
     private static Biblioteca initializeBiblioteca() {
         PrintStream printStream = new PrintStream(System.out);
-        Collection<Book> listOfBooks = new ArrayList<>();
-        listOfBooks.add(new Book("Into the Wild", "John Kraukaer", "1997", printStream));
-        listOfBooks.add(new Book("Animal Farm", "George Orwell", "1934", printStream));
+        Collection<Book> checkedInBooks = new ArrayList<>();
+        Collection<Book> checkedOutBooks = new ArrayList<>();
+        checkedInBooks.add(new Book("Into the Wild", "John Kraukaer", "1997", printStream));
+        checkedInBooks.add(new Book("Animal Farm", "George Orwell", "1934", printStream));
 
-        return new Biblioteca(listOfBooks);
+        return new Biblioteca(checkedInBooks, checkedOutBooks);
     }
 
 }

@@ -38,10 +38,25 @@ public class MainMenuTest {
     }
 
     @Test
-    public void shouldListBooksWhenChoiceIsZero() throws IOException {
+    public void shouldPrintQuitMessageWhenChoiceIsZero() throws IOException {
+        when(reader.readLine()).thenReturn("s", "1", "0");
+        mainMenu.start();
+        verify(printStream).println("¡Hasta la vista!");
+    }
+
+    @Test
+    public void shouldListBooksWhenChoiceIsOne() throws IOException {
         when(reader.readLine()).thenReturn("1", "0");
         mainMenu.start();
         verify(biblioteca).listBooks();
+    }
+
+    @Test
+    public void shouldCheckOutBookWhenChoiceIsTwo() throws IOException {
+        String bookTitle = "";
+        when(reader.readLine()).thenReturn("2", bookTitle, "0");
+        mainMenu.start();
+        verify(biblioteca).checkOut(bookTitle);
     }
 
     @Test
@@ -49,12 +64,5 @@ public class MainMenuTest {
         when(reader.readLine()).thenReturn("s", "1", "0");
         mainMenu.start();
         verify(biblioteca).listBooks();
-    }
-
-    @Test
-    public void shouldPrintQuitMessageWhenUserQuits() throws IOException {
-        when(reader.readLine()).thenReturn("s", "1", "0");
-        mainMenu.start();
-        verify(printStream).println("¡Hasta La Vista!");
     }
 }

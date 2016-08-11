@@ -29,7 +29,8 @@ public class MainMenu {
         printStream.println("Main Menu:");
         printStream.println("----------");
         printStream.println("0: Quit");
-        printStream.println("1: List Books");
+        printStream.println("1: List books");
+        printStream.println("2: Check out a book");
     }
 
     private String readLine() {
@@ -46,6 +47,10 @@ public class MainMenu {
         while (!input.equals("0")) {
             if (input.equals("1")) {
                 biblioteca.listBooks();
+            } else if (input.equals("2")) {
+                printStream.println("Enter title to check out:");
+                String bookTitle = readLine();
+                biblioteca.checkOut(bookTitle);
             } else {
                 printStream.println("Select a valid option!");
             }
@@ -56,7 +61,7 @@ public class MainMenu {
     }
 
     private void displayQuitMessage() {
-        printStream.println("¡Hasta La Vista!");
+        printStream.println("¡Hasta la vista!");
     }
 }
 
